@@ -2,18 +2,32 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import './App.css';
 import './components/CreateRide.css'; // Import the new styles
+import './components/CarpoolList.css'; // Import the carpool list styles
 
 function CarpoolList({ rides }) {
   return (
-    <div className="carpool-list">
-      {rides.map((ride, index) => (
-        <div key={index} className="carpool-item">
-          <p><strong>Driver's name:</strong> {ride.driverName}</p>
-          <p><strong>Going to:</strong> {ride.location}</p>
-          <p><strong>At time (Hr:Min):</strong> {ride.time}</p>
-          <p><strong>From:</strong> {ride.pickupPoint}</p>
-        </div>
-      ))}
+    <div className="carpool-container">
+      <h2 className="title">Active Bookings</h2>
+      <table className="carpool-table">
+        <thead>
+          <tr>
+            <th>Driver's Name</th>
+            <th>Going To</th>
+            <th>At Time (Hr:Min)</th>
+            <th>From</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rides.map((ride, index) => (
+            <tr key={index}>
+              <td>{ride.driverName}</td>
+              <td>{ride.location}</td>
+              <td>{ride.time}</td>
+              <td>{ride.pickupPoint}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -39,19 +53,35 @@ function CreateRide({ addRide }) {
       <form className="create-ride-form">
         <div className="form-group">
           <label htmlFor="location">Choose Location</label>
-          <input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
+          <input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Location"
+          />
         </div>
         <div className="form-group">
           <label htmlFor="time">Choose Time</label>
-          <input value={time} onChange={(e) => setTime(e.target.value)} placeholder="08:00" />
+          <input
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            placeholder="08:00"
+          />
         </div>
         <div className="form-group">
           <label htmlFor="pickup">Pickup Point</label>
-          <input value={pickupPoint} onChange={(e) => setPickupPoint(e.target.value)} placeholder="Pickup Point A" />
+          <input
+            value={pickupPoint}
+            onChange={(e) => setPickupPoint(e.target.value)}
+            placeholder="Pickup Point A"
+          />
         </div>
         <div className="form-buttons">
-          <button onClick={handleSubmit} className="yes-button">Yes</button>
-          <button onClick={() => navigate('/')} className="no-button">No</button>
+          <button type="button" onClick={handleSubmit} className="yes-button">
+            Yes
+          </button>
+          <button type="button" onClick={() => navigate('/')} className="no-button">
+            No
+          </button>
         </div>
       </form>
     </div>

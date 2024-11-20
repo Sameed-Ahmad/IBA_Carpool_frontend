@@ -1,24 +1,36 @@
-import React from 'react';
-import './CarpoolList.css';
+import React from "react";
+import "./CarpoolList.css";
 
 const CarpoolList = () => {
   const carpoolData = [
-    { driverName: 'Saad', destination: 'Location 1', time: '08:00', from: 'Pickup Point A' },
-    { driverName: 'Sameed', destination: 'Location 2', time: '09:00', from: 'Pickup Point B' },
-    { driverName: 'Abaan', destination: 'Location 3', time: '10:00', from: 'Pickup Point C' },
-    // Add more carpool entries as needed
+    { name: "Driver 1", to: "Location", time: "08:00", from: "A" },
+    { name: "Driver 2", to: "Location B", time: "09:30", from: "C" },
+    { name: "Driver 3", to: "Location D", time: "11:00", from: "E" },
   ];
 
   return (
-    <div className="carpool-list">
-      {carpoolData.map((carpool, index) => (
-        <div className="carpool-item" key={index}>
-          <p><strong>Driver's name:</strong> {carpool.driverName}</p>
-          <p><strong>Going to:</strong> {carpool.destination}</p>
-          <p><strong>At time (Hr:Min):</strong> {carpool.time}</p>
-          <p><strong>From:</strong> {carpool.from}</p>
-        </div>
-      ))}
+    <div className="carpool-container">
+      <h2 className="title">Active Bookings</h2>
+      <table className="carpool-table">
+        <thead>
+          <tr>
+            <th>Driver's Name</th>
+            <th>Going To</th>
+            <th>At Time (Hr:Min)</th>
+            <th>From</th>
+          </tr>
+        </thead>
+        <tbody>
+          {carpoolData.map((ride, index) => (
+            <tr key={index}>
+              <td>{ride.name}</td>
+              <td>{ride.to}</td>
+              <td>{ride.time}</td>
+              <td>{ride.from}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
